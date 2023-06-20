@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>spearsubs-ordered</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/spearsubs/spearsubs/main/spearsubsfavicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/spearsubs/spearsubs/main/spearsubsfavicon.ico" type="image/x-icon">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+        }
+
+        .pesan-proses {
+            margin-bottom: 2px;
+            text-align: center;
+            font-size: 20px;
+            z-index: 1;
+        }
+
+        #countdown-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+        }
+
+        #countdown {
+            text-align: center;
+            font-size: 20px;
+            z-index: 1;
+        }
+
+        #rocket-gif {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            padding-left: 7px;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pesan-proses">
+        Pesanan Anda sedang kami proses
+    </div>
+
+    <div id="countdown-container">
+        <div id="countdown"></div>
+
+        <img id="rocket-gif" src="https://raw.githubusercontent.com/spearsubs/spearsubs/main/icons8-rocket.gif"
+            alt="rocket GIF">
+    </div>
+
+    <script>
+        var countdownMinutes = 60; // fungsi untuk mengganti waktu)
+        
+        var countDownDate = new Date().getTime() + countdownMinutes * 60 * 1000;
+
+        // Update hitungan mundur setiap 1 detik
+        var countdownTimer = setInterval(function () {
+            // Dapatkan tanggal dan waktu saat ini
+            var now = new Date().getTime();
+
+            // Hitung selisih waktu antara sekarang dan waktu akhir
+            var distance = countDownDate - now;
+
+            // Hitung mundur menit dan detik
+            var minutes = Math.floor(distance / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Tampilkan hasil dalam elemen dengan id "countdown"
+            document.getElementById("countdown").innerHTML = minutes + " menit " + seconds + " detik";
+
+            // Jika hitungan mundur selesai, hentikan interval
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("countdown").innerHTML = "Pesanan Sudah Selesai! &#9993; ";
+                document.querySelector(".pesan-proses").style.display = "none";
+                document.querySelector("#rocket-gif").style.display = "none";
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
